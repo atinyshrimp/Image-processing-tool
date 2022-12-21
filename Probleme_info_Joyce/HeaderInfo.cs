@@ -69,26 +69,26 @@ namespace PSI_Joyce
 
                 byte[] ogSize = new byte[4]; //donné sur 4 octets
                 for (int i = 0; i < 4; i++) ogSize[i] = tab[2 + i];
-                size = MyImage.ConvertirEndianToInt(ogSize);
+                size = MyImage.EndianToInt(ogSize);
 
                 byte[] ogSizeOffset = new byte[4]; //donné sur 4 octets
                 for (int i = 0; i < 4; i++) ogSizeOffset[i] = tab[10 + i];
-                sizeOffset = MyImage.ConvertirEndianToInt(ogSizeOffset);
+                sizeOffset = MyImage.EndianToInt(ogSizeOffset);
 
                 array = new byte[sizeOffset];
                 for (int i = 0; i < sizeOffset; i++) array[i] = tab[i];
 
                 byte[] ogWidth = new byte[4]; //donné sur 4 octets
                 for (int i = 0; i < 4; i++) ogWidth[i] = tab[18 + i];
-                width = MyImage.ConvertirEndianToInt(ogWidth);
+                width = MyImage.EndianToInt(ogWidth);
 
                 byte[] ogHeight = new byte[4]; //donné sur 4 octets
                 for (int i = 0; i < 4; i++) ogHeight[i] = tab[22 + i];
-                height = MyImage.ConvertirEndianToInt(ogHeight);
+                height = MyImage.EndianToInt(ogHeight);
 
                 byte[] ogBpc = new byte[2]; //donné sur 2 octets
                 for (int i = 0; i < 2; i++) ogBpc[i] = tab[26 + i];
-                bpc = MyImage.ConvertirEndianToInt(ogBpc);
+                bpc = MyImage.EndianToInt(ogBpc);
 
                 padding = width * 3 % 4;
             }
@@ -98,6 +98,7 @@ namespace PSI_Joyce
         /// Création de l'entête d'une image à partir d'une matrice de Pixel
         /// </summary>
         /// <param name="pxm"></param>
+        /// 
         public HeaderInfo(Pixel[,] pxm)
         {
             sizeOffset = 54; // tt le temps 54 ??
@@ -116,21 +117,21 @@ namespace PSI_Joyce
             {
                 #region Header du fichier
 
-                array[2 + i] = MyImage.ConvertirIntToEndian(size, 4)[i]; //taille du fichier bitmap (header inclus)
+                array[2 + i] = MyImage.IntToEndian(size, 4)[i]; //taille du fichier bitmap (header inclus)
                 array[6 + i] = 0; //reserved, can be 0 if created manually
-                array[10 + i] = MyImage.ConvertirIntToEndian(sizeOffset, 4)[i];
+                array[10 + i] = MyImage.IntToEndian(sizeOffset, 4)[i];
 
                 #endregion
 
                 #region Header de l'image
 
-                array[14 + i] = MyImage.ConvertirIntToEndian(40, 4)[i];
-                array[18 + i] = MyImage.ConvertirIntToEndian(width, 4)[i];
-                array[22 + i] = MyImage.ConvertirIntToEndian(height, 4)[i];
+                array[14 + i] = MyImage.IntToEndian(40, 4)[i];
+                array[18 + i] = MyImage.IntToEndian(width, 4)[i];
+                array[22 + i] = MyImage.IntToEndian(height, 4)[i];
                 array[30 + i] = 0; //Compression BI_RGB ; la plus commune
-                array[34 + i] = MyImage.ConvertirIntToEndian(width * height * 3 * bpc, 4)[i]; //taille de l'image en octets
-                array[38 + i] = MyImage.ConvertirIntToEndian(11811, 4)[i]; //?? résolution horizontale par défaut de l'image "Coco"
-                array[42 + i] = MyImage.ConvertirIntToEndian(11811, 4)[i]; //?? résolution verticale de l'image (pixel par mètre, cmmt savoir ça ?)
+                array[34 + i] = MyImage.IntToEndian(width * height * 3 * bpc, 4)[i]; //taille de l'image en octets
+                array[38 + i] = MyImage.IntToEndian(11811, 4)[i]; //?? résolution horizontale par défaut de l'image "Coco"
+                array[42 + i] = MyImage.IntToEndian(11811, 4)[i]; //?? résolution verticale de l'image (pixel par mètre, cmmt savoir ça ?)
                 array[46 + i] = 0; //nombre de couleurs dans la palette de couleur ?? peut-être 0 aussi
                 array[50 + i] = 0; //nombre de couleurs "importantes" utilisées, 0 si elles le sont toutes
 
@@ -139,13 +140,12 @@ namespace PSI_Joyce
 
             for (int i = 0; i < 2; i++)
             {
-                array[26 + i] = MyImage.ConvertirIntToEndian(1, 2)[i]; //bit par couleur
-                array[28 + i] = MyImage.ConvertirIntToEndian(24, 2)[i]; //pour une image de 24bit
+                array[26 + i] = MyImage.IntToEndian(1, 2)[i]; //bit par couleur
+                array[28 + i] = MyImage.IntToEndian(24, 2)[i]; //pour une image de 24bit
             }
 
 
         }
-
 
         #endregion
     }

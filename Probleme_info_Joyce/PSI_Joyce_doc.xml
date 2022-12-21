@@ -211,14 +211,14 @@
             </summary>
             <param name="file">Chemin sous lequel il faudra sauvegarder l'image</param>
         </member>
-        <member name="M:PSI_Joyce.MyImage.ConvertirEndianToInt(System.Byte[])">
+        <member name="M:PSI_Joyce.MyImage.EndianToInt(System.Byte[])">
             <summary>
             Convertit le tableau de bytes passé en paramètres en entier
             </summary>
             <param name="tab"></param>
             <returns></returns>
         </member>
-        <member name="M:PSI_Joyce.MyImage.ConvertirIntToEndian(System.Int32,System.Int32)">
+        <member name="M:PSI_Joyce.MyImage.IntToEndian(System.Int32,System.Int32)">
             <summary>
             Convertit un entier en tableau de bytes
             </summary>
@@ -246,7 +246,7 @@
             </summary>
             <returns>Matrice de Pixel où chacun des Pixels est soit noir, soit blanc</returns>
         </member>
-        <member name="M:PSI_Joyce.MyImage.Negatif">
+        <member name="M:PSI_Joyce.MyImage.Negative">
             <summary>
             Inverse les couleurs de l'image courante
             </summary>
@@ -291,25 +291,25 @@
             <param name="filtre">Noyau à utiliser lors de la convolution</param>
             <returns></returns>
         </member>
-        <member name="M:PSI_Joyce.MyImage.Flou">
+        <member name="M:PSI_Joyce.MyImage.Blur">
             <summary>
             Applique un effet flou sur l'image courante
             </summary>
             <returns></returns>
         </member>
-        <member name="M:PSI_Joyce.MyImage.DetectionBord">
+        <member name="M:PSI_Joyce.MyImage.EdgeDetection">
             <summary>
             Applique l'effet "détection des bords" sur l'image courante
             </summary>
             <returns></returns>
         </member>
-        <member name="M:PSI_Joyce.MyImage.Renforcement">
+        <member name="M:PSI_Joyce.MyImage.Sharpening">
             <summary>
-            Applique l'effet "Renforcement" sur l'image courante
+            Applique l'effet "Sharpening" sur l'image courante
             </summary>
             <returns>Matrice de Pixel correspondant à une image plus nette que l'originale</returns>
         </member>
-        <member name="M:PSI_Joyce.MyImage.Repoussage">
+        <member name="M:PSI_Joyce.MyImage.Embossing">
             <summary>
             Renforce les bords d'une image
             </summary>
@@ -440,7 +440,7 @@
             </summary>
             <returns>Pixel grisé</returns>
         </member>
-        <member name="M:PSI_Joyce.Pixel.Negatif">
+        <member name="M:PSI_Joyce.Pixel.Negative">
             <summary>
             Applique l'effet "Négatif" à l'instance courante de Pixel
             </summary>

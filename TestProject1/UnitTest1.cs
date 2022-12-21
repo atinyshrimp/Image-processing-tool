@@ -16,13 +16,13 @@ namespace PSI_Joyce
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual(20, MyImage.ConvertirEndianToInt(tab));
+            Assert.AreEqual(20, MyImage.EndianToInt(tab));
         }
 
         [TestMethod]
         public void TestMethod2()
         {
-            Assert.AreEqual(Program.AfficheTableau(tab), Program.AfficheTableau(MyImage.ConvertirIntToEndian(20, 4)));
+            Assert.AreEqual(Program.AfficheTableau(tab), Program.AfficheTableau(MyImage.IntToEndian(20, 4)));
         }
 
         [TestMethod]

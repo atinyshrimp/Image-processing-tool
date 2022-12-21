@@ -73,6 +73,7 @@ namespace PSI_Joyce
             image = pxm;
             header = new HeaderInfo(pxm);
         }
+
         #endregion
 
         #region Methods
@@ -123,7 +124,7 @@ namespace PSI_Joyce
         /// </summary>
         /// <param name="tab"></param>
         /// <returns></returns>
-        static public int ConvertirEndianToInt(byte[] tab)
+        static public int EndianToInt(byte[] tab)
         {
             int res = 0;
             if (tab != null && tab.Length > 0)
@@ -143,7 +144,7 @@ namespace PSI_Joyce
         /// <param name="val">Entier à convertir</param>
         /// <param name="length">Longueur du tableau voulu (soit 2, soit 4)</param>
         /// <returns></returns>
-        static public byte[] ConvertirIntToEndian(int val, int length)
+        static public byte[] IntToEndian(int val, int length)
         {
             byte[] res = null;
             if ((val >= 0 && length == 2) || (val >= 0 && length == 4))
@@ -261,7 +262,7 @@ namespace PSI_Joyce
         /// Inverse les couleurs de l'image courante
         /// </summary>
         /// <returns>Matrice de Pixels où chaque pixel est la couleur négative du pixel originale</returns>
-        public Pixel[,] Negatif()
+        public Pixel[,] Negative()
         {
             Pixel[,] res = null;
             if (image != null && image.Length > 0)
@@ -271,7 +272,7 @@ namespace PSI_Joyce
                 {
                     for (int j = 0; j < header.Width; j++)
                     {
-                        res[i, j] = image[i, j].Negatif();
+                        res[i, j] = image[i, j].Negative();
                     }
                 }
             }
@@ -464,7 +465,7 @@ namespace PSI_Joyce
 
         #endregion
 
-        #region Filtres (TD4)
+        #region Filters (TD4)
 
         /// <summary>
         /// Applique une convolution sur l'image de l'instance courante
@@ -538,7 +539,7 @@ namespace PSI_Joyce
         /// Applique un effet flou sur l'image courante
         /// </summary>
         /// <returns></returns>
-        public Pixel[,] Flou()
+        public Pixel[,] Blur()
         {
             Pixel[,] res = null;
             if (image != null && image.Length > 0) res = Convolve(Convolution.Blur);
@@ -549,7 +550,7 @@ namespace PSI_Joyce
         /// Applique l'effet "détection des bords" sur l'image courante
         /// </summary>
         /// <returns></returns>
-        public Pixel[,] DetectionBord()
+        public Pixel[,] EdgeDetection()
         {
             Pixel[,] res = null;
             if (image != null && image.Length > 0) res = Convolve(Convolution.EdgeDetect);
@@ -558,10 +559,10 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique l'effet "Renforcement" sur l'image courante
+        /// Applique l'effet "Sharpening" sur l'image courante
         /// </summary>
         /// <returns>Matrice de Pixel correspondant à une image plus nette que l'originale</returns>
-        public Pixel[,] Renforcement()
+        public Pixel[,] Sharpening()
         {
             Pixel[,] res = null;
             if (image != null && image.Length > 0) res = Convolve(Convolution.Sharpen);
@@ -572,7 +573,7 @@ namespace PSI_Joyce
         /// Renforce les bords d'une image
         /// </summary>
         /// <returns></returns>
-        public Pixel[,] Repoussage()
+        public Pixel[,] Embossing()
         {
             Pixel[,] res = null;
             if (image != null && image.Length > 0) res = Convolve(Convolution.Embossing);

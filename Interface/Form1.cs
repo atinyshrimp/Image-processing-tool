@@ -135,7 +135,7 @@ namespace Interface
             if (pictureBox1.Image != null)
             {
                 MyImage source = new MyImage(pictureBox1.ImageLocation);
-                MyImage res = new MyImage(source.Negatif());
+                MyImage res = new MyImage(source.Negative());
                 savingPath = savingPath + "_neg.bmp";
                 res.FromImageToFile(savingPath);
                 pictureBox1.Load(savingPath);
@@ -147,7 +147,7 @@ namespace Interface
             if (pictureBox1.Image != null)
             {
                 MyImage source = new MyImage(pictureBox1.ImageLocation);
-                MyImage res = new MyImage(source.Flou());
+                MyImage res = new MyImage(source.Blur());
                 savingPath = savingPath + "_blurred.bmp";
                 res.FromImageToFile(savingPath);
                 pictureBox1.Load(savingPath);
@@ -159,7 +159,7 @@ namespace Interface
             if (pictureBox1.Image != null)
             {
                 MyImage source = new MyImage(pictureBox1.ImageLocation);
-                MyImage res = new MyImage(source.Renforcement());
+                MyImage res = new MyImage(source.Sharpening());
                 savingPath = savingPath + "_sharpened.bmp";
                 res.FromImageToFile(savingPath);
                 pictureBox1.Load(savingPath);
@@ -171,7 +171,7 @@ namespace Interface
             if (pictureBox1.Image != null)
             {
                 MyImage source = new MyImage(pictureBox1.ImageLocation);
-                MyImage res = new MyImage(source.DetectionBord());
+                MyImage res = new MyImage(source.EdgeDetection());
                 savingPath = savingPath + "_edged.bmp";
                 res.FromImageToFile(savingPath);
                 pictureBox1.Load(savingPath);
@@ -203,7 +203,7 @@ namespace Interface
             if (pictureBox1.Image != null)
             {
                 MyImage source = new(pictureBox1.ImageLocation);
-                MyImage res = new(source.Repoussage());
+                MyImage res = new(source.Embossing());
                 savingPath += "_embossed.bmp";
                 res.FromImageToFile(savingPath);
                 pictureBox1.Load(savingPath);

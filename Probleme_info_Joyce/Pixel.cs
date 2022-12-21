@@ -197,7 +197,7 @@ namespace PSI_Joyce
         /// Applique l'effet "Négatif" à l'instance courante de Pixel
         /// </summary>
         /// <returns>Pixel correspondant à la couleur inverse du Pixel de base</returns>
-        public Pixel Negatif()
+        public Pixel Negative()
         {
             return new Pixel((byte)(255 - red), (byte)(255 - green), (byte)(255 - blue));
         }
