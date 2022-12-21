@@ -838,9 +838,9 @@ namespace PSI_Joyce
             float decalageX = 0f; //-.5f
             Pixel[,] res = new Pixel[hauteur, largeur];
 
-            Complexe center = new(0, 0);
-            Complexe c;
-            Complexe z;
+            Complex center = new(0, 0);
+            Complex c;
+            Complex z;
 
             var colors = (from s in Enumerable.Range(0, 256)
                           select Color.FromArgb((s >> 5) * 36, (s >> 3 & 7) * 36, (s & 3) * 85)).ToArray();
@@ -849,8 +849,8 @@ namespace PSI_Joyce
             {
                 for (int j = 0; j < largeur; j++)
                 {
-                    z = new Complexe((float)(1.5 * (i - hauteur / 2) / (0.5 * hauteur * zoom) + decalageY), (float)(1.0 * (j - largeur / 2) / (0.5 * largeur * zoom) + decalageX)); //cmmt on choisit Z0 ???
-                    Complexe og = z;
+                    z = new Complex((float)(1.5 * (i - hauteur / 2) / (0.5 * hauteur * zoom) + decalageY), (float)(1.0 * (j - largeur / 2) / (0.5 * largeur * zoom) + decalageX)); //cmmt on choisit Z0 ???
+                    Complex og = z;
                     int k = iteration;
                     while (z.Module < 2 && k > 1)
                     {

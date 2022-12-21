@@ -9,14 +9,14 @@
             Classe servant à manipuler les nombres complexes, à utiliser lors de la création de la fractale
             </summary>
         </member>
-        <member name="P:PSI_Joyce.Complexe.Reelle">
+        <member name="P:PSI_Joyce.Complexe.Real">
             <summary>
             Partie réelle du nombre complexe courant
             </summary>
         </member>
-        <member name="P:PSI_Joyce.Complexe.Imaginaire">
+        <member name="P:PSI_Joyce.Complexe.Imaginary">
             <summary>
-            Partie imaginaire du nombre complexe courant
+            Partie imaginary du nombre complexe courant
             </summary>
         </member>
         <member name="P:PSI_Joyce.Complexe.Module">
@@ -38,8 +38,8 @@
             <summary>
             Crée une instance de Complexe grâce aux parties fournies
             </summary>
-            <param name="reelle">Partie réelle du nombre complexe</param>
-            <param name="imaginaire">Partie imaginaire du nombre complexe</param>
+            <param name="real">Partie réelle du nombre complexe</param>
+            <param name="imaginary">Partie imaginary du nombre complexe</param>
         </member>
         <member name="M:PSI_Joyce.Complexe.Pow(System.Int32)">
             <summary>
