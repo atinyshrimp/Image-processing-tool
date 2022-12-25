@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 namespace PSI_Joyce
 {
     /// <summary>
-    /// Classe gérant le fonctionnement d'un QRCode
+    /// Class managing the operation of a QRCode
     /// </summary>
     public class QRCode
     {
         #region Attributes
 
-        private string mode = "0010"; //mode alphanumérique imposé pour le projet
-        private int version; // 1 ou 2
+        private string mode = "0010"; // alphanumeric mode imposed for the project
+        private int version; // 1 or 2
         private string data;
         private byte[] dataBytes;
-        private int errorCodeCount; //nombre d'octets pour le code d'erreur
+        private int errorCodeCount; // number of bytes for error code
         private byte[] errorCode;
         private int length;
         private string lengthBin;
         private int maxLength;
         private int maxBit;
         static private string[] filler = { "11101100", "00010001" };
-        static private string formatInfoBits = "111011111000100"; //Masque de niveau 0 et code d'erreur L, donné par la respo module
+        static private string formatInfoBits = "111011111000100"; // Level 0 mask and error code L, given by the respo module (imposed)
         static private char[] character = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
                                             'W', 'X', 'Y', 'Z', ' ', '$', '%', '*', '+', '-', '.', '/', ':'};
 
@@ -42,22 +42,22 @@ namespace PSI_Joyce
         #region Properties
 
         /// <summary>
-        /// Ensemble des caractères pris en compte par le mode alphanumérique
+        /// Set of characters taken into account by the alphanumeric mode
         /// </summary>
         static public char[] Character { get => character; }
 
         /// <summary>
-        /// Image du QR Code final
+        /// Image of the final QR Code
         /// </summary>
         public Pixel[,] Code { get => code; }
 
         /// <summary>
-        /// Ensemble des bits à encoder dans l'image finale à retourner
+        /// Set of bits to be encoded in the final image to be returned
         /// </summary>
         public string BitChain { get => bitChain; }
 
         /// <summary>
-        /// Matrice de Pixels correspondant au masque à appliquer au QRCode
+        /// Pixel matrix corresponding to the mask to apply to the QRCode
         /// </summary>
         public Pixel[,] Mask { get => mask; }
 
@@ -66,9 +66,9 @@ namespace PSI_Joyce
         #region Constructor(s)
 
         /// <summary>
-        /// Crée une instance de QR Code à partir d'une chaîne de caractères
+        /// Creates a QR Code instance from a character string
         /// </summary>
-        /// <param name="data">Mot à convertir en QR Code</param>
+        /// <param name="data">Word to convert to QR Code</param>
         public QRCode(string data)
         {
             if (data != "" && data != null)
@@ -86,24 +86,24 @@ namespace PSI_Joyce
                         dataBytes[i] = Convert.ToByte(data[i]);
 
                     length = data.Length;
-                    lengthBin = MyImage.FillBinary(Convert.ToString(length, 2), 9); //nbre de caractères codé sur 9 bits en alphanumérique
+                    lengthBin = MyImage.FillBinary(Convert.ToString(length, 2), 9); // number of characters coded on 9 bits in alphanumeric
 
                     if (data.Length <= 25)
                     {
                         version = 1;
                         code = new Pixel[21, 21];
                         functionModules = new bool[21, 21];
-                        maxLength = 25; //25 char max pour le niveau de correction L (7%)
-                        maxBit = 19 * 8; //19 octets max pour version 1 et erreur code L
-                        errorCodeCount = 7; //7 octets pour le code d'erreur
+                        maxLength = 25; // 25 char max for correction level L (7%)
+                        maxBit = 19 * 8; // 19 bytes max for version 1 and error code L
+                        errorCodeCount = 7; // 7 bytes for error code
                     }
                     else if (data.Length > 25 && data.Length <= 47)
                     {
                         version = 2;
                         code = new Pixel[25, 25];
                         functionModules = new bool[25, 25];
-                        maxLength = 47; //same
-                        maxBit = 34 * 8; //34 octets max pour version 1 et erreur code L
+                        maxLength = 47; // same
+                        maxBit = 34 * 8; // 34 bytes max for version 1 and error code L
                         errorCodeCount = 10;
                     }
 
@@ -129,7 +129,7 @@ namespace PSI_Joyce
             int cpt = 0;
             if (bitChain.Length < maxBit)
             {
-                while (bitChain.Length < maxBit && cpt < 4) //on ne peut ajouter que quatres zéros maximum
+                while (bitChain.Length < maxBit && cpt < 4) // we can only add a maximum of four zeros
                 {
                     bitChain += "0";
                     cpt++;
@@ -164,7 +164,7 @@ namespace PSI_Joyce
                 cpt++;
             }
 
-            //ajout les bits de la correction de l'erreur
+            // adding error correction bits
             dataBytes = new byte[bitChain.Length / 8];
             for (int i = 0; i < dataBytes.Length; i++)
             {
@@ -178,30 +178,30 @@ namespace PSI_Joyce
                 bitChain += MyImage.FillBinary(Convert.ToString(errorCode[i], 2), 8);
         }
 
-        private void MotifsDeRecherche(Pixel[,] mat)
+        private void FinderPatterns(Pixel[,] mat)
         {
-            //placement des motifs de recherche
+            // placement des motifs de recherche
             for (int i = 0; i < 7; i++)
             {
-                //en haut à gauche
+                // top left
                 mat[i, 0] = Pixel.Black;
                 mat[i, 6] = Pixel.Black;
                 mat[6, i] = Pixel.Black;
                 mat[0, i] = Pixel.Black;
 
-                //en haut à droite
+                // top right
                 mat[0, mat.GetLength(1) - 1 - i] = Pixel.Black;
                 mat[6, mat.GetLength(1) - 1 - i] = Pixel.Black;
                 mat[i, mat.GetLength(1) - 1] = Pixel.Black;
                 mat[i, mat.GetLength(0) - 7] = Pixel.Black;
 
-                //en bas à gauche
+                // bottom left
                 mat[mat.GetLength(0) - 1 - i, 0] = Pixel.Black;
                 mat[mat.GetLength(0) - 1 - i, 6] = Pixel.Black;
                 mat[mat.GetLength(0) - 7, i] = Pixel.Black;
                 mat[mat.GetLength(0) - 1, i] = Pixel.Black;
 
-                //les carrés plein à l'intérieur de chaque carré
+                // the filled squares inside each square
                 for (int k = 0; k < 3; k++)
                 {
                     for (int l = 0; l < 3; l++)
@@ -215,7 +215,7 @@ namespace PSI_Joyce
 
         }
 
-        private void MotifsAlignement(Pixel[,] mat)
+        private void AlignmentPatterns(Pixel[,] mat)
         {
             mat[18, 18] = Pixel.Black;
             for (int i = 0; i < 5; i++)
@@ -314,14 +314,14 @@ namespace PSI_Joyce
         {
             Pixel[,] res = new Pixel[code.GetLength(0), code.GetLength(1)];
 
-            //remplissage pour que la matrice soit lisible et enregistrable
+            // padding so that the matrix is readable and savable
             for (int i = 0; i < res.GetLength(0); i++)
                 for (int j = 0; j < res.GetLength(1); j++)
                     res[i, j] = Pixel.White;
 
             FormatInfo(res);
 
-            //Motifs de synchronisation
+            // Timing patterns
             Pixel temp;
             for (int i = 0; i < 12; i++)
             {
@@ -332,14 +332,14 @@ namespace PSI_Joyce
                 res[6, 6 + i] = temp;
             }
 
-            MotifsDeRecherche(res);
+            FinderPatterns(res);
 
             if (version == 2)
-                MotifsAlignement(res);
+                AlignmentPatterns(res);
 
-            res[4 * version + 9, 8] = Pixel.Black; //motif sombre commun à tous les QR Codes
+            res[4 * version + 9, 8] = Pixel.Black; // dark pattern common to all QR Codes
 
-            //entrée des données
+            // data entry
 
             int cpt = 0;
             int qrSize = code.GetLength(0);
@@ -368,17 +368,17 @@ namespace PSI_Joyce
                 }
             }
 
-            //application du masque 0
+            // Application of Mask 0
             for (int i = 0; i < code.GetLength(0); i++)
             {
                 for (int j = 0; j < code.GetLength(1); j++)
                 {
                     temp = res[i, j];
-                    if (IsModuleFree(i, j)) res[i, j] = Pixel.XOR(temp, mask[i, j]); //application de l'opération logique "ou exclusif"
+                    if (IsModuleFree(i, j)) res[i, j] = Pixel.XOR(temp, mask[i, j]); // application of the "exclusive or" logical operation
                 }
             }
 
-            //remplissage des format info à côté des motifs de recherche
+            // fill in format infos next to finder patterns
             for (int i = 0; i < 15; i++)
             {
                 if (i < 7)
@@ -422,10 +422,10 @@ namespace PSI_Joyce
         #region Public methods
 
         /// <summary>
-        /// Cherche à quel index la lettre passée en paramètres se trouve dans le tableau de caractères disponibles dans le mode alphanumérique
+        /// Finds the index at which the letter passed in parameters is found in the char array of available characters in alphanumeric mode
         /// </summary>
-        /// <param name="lettre">Caractère à chercher dans le tabelau</param>
-        /// <returns>Un entier correspondant à la place occupée par la lettre</returns>
+        /// <param name="lettre">Character to look for in the array</param>
+        /// <returns>An integer corresponding to the space occupied by the letter</returns>
         static public int FindIndex(char lettre)
         {
             int res = -1;
@@ -446,9 +446,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Sépare le mot à retranscrire en QRCode en paires
+        /// Separates the word to be transcribed into QRCode in pairs
         /// </summary>
-        /// <returns>Tableau de string où chaque index contient une chaîne de deux caractères (ou un seul pour le dernier index en fonction des cas)</returns>
+        /// <returns>Array of string where each index contains a string of two characters (or only one for the last index depending on the case)</returns>
         public string[] GetPairs()
         {
             string[] res = null;
@@ -462,15 +462,15 @@ namespace PSI_Joyce
                     c += data[i];
                     i++;
                 }
-                res = c.Split('~'); //caractère séparateur non pris en compte par l'alphanumérique
+                res = c.Split('~'); // separator character not taken into account by the alphanumeric
             }
             return res;
         }
 
         /// <summary>
-        /// Donne le nombre binaire correspondant à la paire de caractères passée en paramètres
+        /// Gives the binary number corresponding to the pair of characters passed in parameters
         /// </summary>
-        /// <param name="pair">Deux caractères à "traduire" en base 2</param>
+        /// <param name="pair">Two characters to transcribe in base 2</param>
         /// <returns></returns>
         static public string Binary(string pair)
         {
@@ -492,7 +492,7 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique un Padding de un Pixel au QRCode
+        /// Applies a one-pixel padding to the QRCode
         /// </summary>
         /// <returns></returns>
         public Pixel[,] PrintCode()
