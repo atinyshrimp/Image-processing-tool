@@ -280,172 +280,172 @@
         </member>
         <member name="M:PSI_Joyce.MyImage.Rotate(System.Int32)">
             <summary>
-            Rotates the pixel matrix of the current MyImage instance, clockwise (+) and counter-clockwise (-)
+            Rotates the pixel matrix of the current MyImage instance, clockwise (-) and counter-clockwise (+)
             </summary>
             <param name="angle">angle (in degrees) to use when rotating (negative for clockwise)</param>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Convolve(System.Single[0:,0:])">
             <summary>
-            Applique une convolution sur l'image de l'instance courante
+            Applies a convolution to the image of the current instance
             </summary>
-            <param name="filtre">Noyau à utiliser lors de la convolution</param>
+            <param name="filter">Kernel to use when convolving</param>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Blur">
             <summary>
-            Applique un effet flou sur l'image courante
+            Applies a blur effect to the current image
             </summary>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.EdgeDetection">
             <summary>
-            Applique l'effet "détection des bords" sur l'image courante
+            Applies the "edge detection" effect on the current image
             </summary>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Sharpening">
             <summary>
-            Applique l'effet "Sharpening" sur l'image courante
+            Applies the "Sharpening" effect to the current image
             </summary>
-            <returns>Matrice de Pixel correspondant à une image plus nette que l'originale</returns>
+            <returns>Pixel matrix corresponding to a sharper image than the original</returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Embossing">
             <summary>
-            Renforce les bords d'une image
+            Reinforce the edges of within an image
             </summary>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Histogram">
             <summary>
-            Génère un histogramme de toutes les couleurs de l'image
+            Generates a histogram of all the colors in the image
             </summary>
-            <returns>Matrice de pixels représentant un histogramme RGB d'une image</returns>
+            <returns>Pixel matrix representing an RGB histogram of an image</returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Histogram(System.String)">
             <summary>
-            Génère un histogramme basé sur l'image de l'instance courante et la couleur soumise
+            Generates a histogram based on the image of the current instance and the submitted color
             </summary>
-            <param name="color">Couleur sur laquelle l'histogramme sera basé</param>
+            <param name="color">Color on which the histogram will be based</param>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.EncodeImage(PSI_Joyce.Pixel[0:,0:])">
             <summary>
-            Cache une image dans une autre
+            Hide an image within another
             </summary>
-            <param name="mat">Image à masquer dans l'instance actuelle</param>
+            <param name="mat">Image to hide in current instance</param>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.DecodeImage">
             <summary>
-            Récupère une image cachée dans une autre, s'il y en a une
+            Retrieves an image hidden in another, if there is one
             </summary>
-            <returns>L'image cachée dans l'instance courante</returns>
+            <returns>The hidden image within the current instance</returns>
         </member>
         <member name="M:PSI_Joyce.MyImage.Fractal(System.String)">
             <summary>
-            Génère une fractale parmi une sélection
+            Generates a fractal from a selection
             </summary>
-            <param name="type">type de la fractale voulue</param>
-            <returns>Image (matrice de pixels) représentant une fractale</returns>
+            <param name="type">type of the desired fractal</param>
+            <returns>Image (Pixel matrix) representing a fractal</returns>
         </member>
         <member name="T:PSI_Joyce.Pixel">
             <summary>
-            Classe gérant le fonctionnement des pixels
+            Class managing the operation of pixels
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.Red">
             <summary>
-            Composante rouge du Pixel
+            Pixel red component
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.Green">
             <summary>
-            Composante verte du Pixel
+            Pixel green component
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.Blue">
             <summary>
-            Composante bleue du Pixel
+            Pixel blue component
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.Avrg">
             <summary>
-            La moyenne des trois composantes
+            The average of the three color components
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.Item(System.Int32)">
             <summary>
-            Indexation de la classe Pixel
+            Indexer declaration of the Pixel class
             </summary>
-            <param name="n">0 : Composante rouge; 1 : Verte; 2 : Bleue</param>
-            <returns>Byte correspondant à la composante selectionnée</returns>
+            <param name="n">0 : Red component; 1 : Green component; 2 : Blue component</param>
+            <returns>Byte corresponding to the selected componente</returns>
         </member>
         <member name="P:PSI_Joyce.Pixel.Black">
             <summary>
-            Pixel représentant la couleur noire
+            Pixel representing the black color
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.White">
             <summary>
-            Pixel représentant la couleur blanche
+            Pixel representing the white color
             </summary>
         </member>
         <member name="P:PSI_Joyce.Pixel.BlueColor">
             <summary>
-            Pixel représentant la couleur bleue
+            Pixel representing the blue color
             </summary>
         </member>
         <member name="M:PSI_Joyce.Pixel.#ctor(System.Byte,System.Byte,System.Byte)">
             <summary>
-            Construit un Pixel, triplet de bytes correspondant aux composantes rouge, verte et bleu d'une couleur
+            Constructs a Pixel with a triplet of bytes corresponding to the red, green and blue components of a color
             </summary>
-            <param name="red">Composante rouge du Pixel, comprise entre 0 et 255</param>
-            <param name="green">Composante verte du Pixel, comprise entre 0 et 255</param>
-            <param name="blue">Composante bleue du Pixel, comprise entre 0 et 255</param>
+            <param name="red">Red component of the Pixel, between 0 and 255</param>
+            <param name="green">Green component of the Pixel, between 0 and 255</param>
+            <param name="blue">Blue component of the Pixel, between 0 and 255</param>
         </member>
         <member name="M:PSI_Joyce.Pixel.op_Equality(PSI_Joyce.Pixel,PSI_Joyce.Pixel)">
             <summary>
-            Vérifie si deux instances de Pixel sont égales
+            Checks if two instances of Pixel are equal
             </summary>
-            <param name="a">Premier pixel (comparateur)</param>
-            <param name="b">Deuxième pixel (comparé)</param>
-            <returns>True si les deux Pixels sont les mêmes, False sinon</returns>
+            <param name="a">First pixel (comparator)</param>
+            <param name="b">Second pixel (compared)</param>
+            <returns>True if the two Pixels are the same, False otherwise</returns>
         </member>
         <member name="M:PSI_Joyce.Pixel.op_Inequality(PSI_Joyce.Pixel,PSI_Joyce.Pixel)">
             <summary>
-            Vérifie si deux instances de Pixel sont différentes
+            Checks if two Pixel instances are different
             </summary>
-            <param name="a">Premier pixel (comparateur)</param>
-            <param name="b">Deuxième pixel (comparé)</param>
-            <returns>True si les deux Pixels sont différents, False sinon</returns>
+            <param name="a">First pixel (comparator)</param>
+            <param name="b">Second pixel (compared)</param>
+            <returns>True if the two Pixels are different, False otherwise</returns>
         </member>
         <member name="M:PSI_Joyce.Pixel.ReadPixel(System.Collections.Generic.Queue{System.Byte})">
             <summary>
             
             </summary>
-            <param name="queue">Queue contenant tous les bytes de l'image bitmap</param>
-            <returns>Pixel correspondant aux trois premiers bytes dans la Queue passée en paramètres</returns>
+            <param name="queue">Queue containing all the bytes of the bitmap image</param>
+            <returns>Pixel corresponding to the first three bytes in the Queue passed in parameters</returns>
         </member>
         <member name="M:PSI_Joyce.Pixel.XOR(PSI_Joyce.Pixel,PSI_Joyce.Pixel)">
             <summary>
-            Applique l'opération logique "Ou exclusif"
+            Applies the "Exclusive Or" logical operation
             </summary>
-            <param name="a">Première entrée</param>
-            <param name="b">Deuxième entrée</param>
-            <returns>Pixel noir si les deux entrées sont différentes, Pixel blanc sinon</returns>
+            <param name="a">First entry</param>
+            <param name="b">Second entry</param>
+            <returns>Black Pixel if the two inputs are different, white Pixel otherwise</returns>
         </member>
         <member name="M:PSI_Joyce.Pixel.Grayscale">
             <summary>
-            Colore le Pixel courant en nuance de gris
+            Colors the current pixel in shades of gray
             </summary>
-            <returns>Pixel grisé</returns>
+            <returns>Greyscale Pixel</returns>
         </member>
         <member name="M:PSI_Joyce.Pixel.Negative">
             <summary>
-            Applique l'effet "Négatif" à l'instance courante de Pixel
+            Applies the "Negative" effect to the current instance of Pixel
             </summary>
-            <returns>Pixel correspondant à la couleur inverse du Pixel de base</returns>
+            <returns>Pixel corresponding to the inverse color of the base Pixel</returns>
         </member>
         <member name="T:PSI_Joyce.Program">
             <summary>
@@ -468,58 +468,58 @@
         </member>
         <member name="T:PSI_Joyce.QRCode">
             <summary>
-            Classe gérant le fonctionnement d'un QRCode
+            Class managing the operation of a QRCode
             </summary>
         </member>
         <member name="P:PSI_Joyce.QRCode.Character">
             <summary>
-            Ensemble des caractères pris en compte par le mode alphanumérique
+            Set of characters taken into account by the alphanumeric mode
             </summary>
         </member>
         <member name="P:PSI_Joyce.QRCode.Code">
             <summary>
-            Image du QR Code final
+            Image of the final QR Code
             </summary>
         </member>
         <member name="P:PSI_Joyce.QRCode.BitChain">
             <summary>
-            Ensemble des bits à encoder dans l'image finale à retourner
+            Set of bits to be encoded in the final image to be returned
             </summary>
         </member>
         <member name="P:PSI_Joyce.QRCode.Mask">
             <summary>
-            Matrice de Pixels correspondant au masque à appliquer au QRCode
+            Pixel matrix corresponding to the mask to apply to the QRCode
             </summary>
         </member>
         <member name="M:PSI_Joyce.QRCode.#ctor(System.String)">
             <summary>
-            Crée une instance de QR Code à partir d'une chaîne de caractères
+            Creates a QR Code instance from a character string
             </summary>
-            <param name="data">Mot à convertir en QR Code</param>
+            <param name="data">Word to convert to QR Code</param>
         </member>
         <member name="M:PSI_Joyce.QRCode.FindIndex(System.Char)">
             <summary>
-            Cherche à quel index la lettre passée en paramètres se trouve dans le tableau de caractères disponibles dans le mode alphanumérique
+            Finds the index at which the letter passed in parameters is found in the char array of available characters in alphanumeric mode
             </summary>
-            <param name="lettre">Caractère à chercher dans le tabelau</param>
-            <returns>Un entier correspondant à la place occupée par la lettre</returns>
+            <param name="lettre">Character to look for in the array</param>
+            <returns>An integer corresponding to the space occupied by the letter</returns>
         </member>
         <member name="M:PSI_Joyce.QRCode.GetPairs">
             <summary>
-            Sépare le mot à retranscrire en QRCode en paires
+            Separates the word to be transcribed into QRCode in pairs
             </summary>
-            <returns>Tableau de string où chaque index contient une chaîne de deux caractères (ou un seul pour le dernier index en fonction des cas)</returns>
+            <returns>Array of string where each index contains a string of two characters (or only one for the last index depending on the case)</returns>
         </member>
         <member name="M:PSI_Joyce.QRCode.Binary(System.String)">
             <summary>
-            Donne le nombre binaire correspondant à la paire de caractères passée en paramètres
+            Gives the binary number corresponding to the pair of characters passed in parameters
             </summary>
-            <param name="pair">Deux caractères à "traduire" en base 2</param>
+            <param name="pair">Two characters to transcribe in base 2</param>
             <returns></returns>
         </member>
         <member name="M:PSI_Joyce.QRCode.PrintCode">
             <summary>
-            Applique un Padding de un Pixel au QRCode
+            Applies a one-pixel padding to the QRCode
             </summary>
             <returns></returns>
         </member>
