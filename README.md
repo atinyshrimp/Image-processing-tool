@@ -45,10 +45,6 @@ cd Image-processing-tool/
 packagemanager install
 ```
 
-## How to tweak this project for your own uses
-
-As this project is under the [MIT](https://choosealicense.com/licenses/mit/) license, you can clone this project and rename this project to use for your own purposes !
-
 ## Found a bug ?
 
 If you found an issue or would like to submit an improvement to this project, please submit an issue using the "Issues" tab just above. If you would like to submit a PR with a fix, reference the issue you created !
