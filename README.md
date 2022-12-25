@@ -2,7 +2,7 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Logo_esilv_png_blanc.png" alt="Logo of the project" align="right" height="75rem">
 </a>
 
-# Image-processing-tool &middot; ![GitHub](https://img.shields.io/github/license/atinyzen/Image-processing-tool) ![GitHub last commit](https://img.shields.io/github/last-commit/atinyzen/Image-processing-tool?color=%2345f14d)
+# Image-processing-tool &middot; ![GitHub last commit](https://img.shields.io/github/last-commit/atinyzen/Image-processing-tool?color=%2345f14d)
 #### An image processing tool written in C# as a project for my 2nd year of engineering school.
 <br>
 
