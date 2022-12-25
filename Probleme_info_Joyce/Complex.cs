@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PSI_Joyce
 {
     /// <summary>
-    /// Classe servant à manipuler les nombres complexes, à utiliser lors de la création de la fractale
+    /// Class used to manipulate complex numbers, to be used when creating the fractal
     /// </summary>
     public class Complex
     {
@@ -22,27 +22,27 @@ namespace PSI_Joyce
         #region Properties
 
         /// <summary>
-        /// Partie réelle du nombre complexe courant
+        /// Real part of the current complex number
         /// </summary>
         public float Real { get => real; }
 
         /// <summary>
-        /// Partie imaginary du nombre complexe courant
+        /// Imaginary part of the current complex number
         /// </summary>
         public float Imaginary { get => imaginary; }
 
         /// <summary>
-        /// Module du nombre complexe
+        /// Module of the current complex number
         /// </summary>
         public float Module { get => (float)Math.Sqrt(Math.Pow(real, 2) + Math.Pow(imaginary, 2)); }
 
         /// <summary>
-        /// Sinus hyperbolique du nombre complexe
+        /// Hyperbolic sine of the complex number
         /// </summary>
         public Complex Sinh { get => new Complex((float)(Math.Sinh(real) * Math.Cos(imaginary)), (float)(Math.Cosh(real) * Math.Sin(imaginary))); }
 
         /// <summary>
-        /// Sinus du nombre complexe
+        /// Sine of the current complex number
         /// </summary>
         public Complex Sin { get => new Complex((float)(Math.Sin(real) * Math.Cosh(imaginary)), (float)(Math.Cos(real) * Math.Sinh(imaginary))); }
 
@@ -51,10 +51,10 @@ namespace PSI_Joyce
         #region Constructors
 
         /// <summary>
-        /// Crée une instance de Complex grâce aux parties fournies
+        /// Create an instance of Complex using the provided parts
         /// </summary>
-        /// <param name="real">Partie réelle du nombre complexe</param>
-        /// <param name="imaginary">Partie imaginary du nombre complexe</param>
+        /// <param name="real">Real part of the complex number</param>
+        /// <param name="imaginary">Imaginary part of the complex number</param>
         public Complex(float real, float imaginary)
         {
             this.real = real;
@@ -66,17 +66,17 @@ namespace PSI_Joyce
         #region Methods
 
         /// <summary>
-        /// Applique une puissance entière au nombre complexe de l'instance courante
+        /// Applies an integer power to the complex number of the current instance
         /// </summary>
-        /// <param name="power">Puissance à appliquer</param>
-        /// <returns>Un Complex correspondant au Complex de base à la power-ième puissance</returns>
+        /// <param name="power">Power to apply</param>
+        /// <returns>A Complex object corresponding to the original Complex to the power-th power</returns>
         public Complex Pow(int power)
         {
             Complex res = null;
             if (power > 1)
             {
                 res = this;
-                for (int i = 1; i < power; i++) // could've done that differently; res = 1, puis res *= this avec i <= power
+                for (int i = 1; i < power; i++) // could've done that differently; res = 1, then res *= this with i <= power
                     res *= this;
             }
             else if (power == 1) res = this;
@@ -89,12 +89,12 @@ namespace PSI_Joyce
         #region Operators
 
         /// <summary>
-        /// Multiplie deux nombres complexes entre eux
+        /// Multiply two Complex numbers together
         /// </summary>
-        /// <param name="a">Premier terme de la multiplication</param>
-        /// <param name="b">Deuxième terme de la multiplication</param>
-        /// <returns>Produit des deux nombres complexes</returns>
-        static public Complex operator *(Complex a, Complex b) //so we can apply the Power operation (with "*=")
+        /// <param name="a">Multiplier</param>
+        /// <param name="b">Multiplicand</param>
+        /// <returns>Product of the two Complex objects</returns>
+        static public Complex operator *(Complex a, Complex b) // so we can apply the Power operation (with "*=")
         {
             Complex res = null;
             res = new Complex(a.real * b.real - a.imaginary * b.imaginary, a.real * b.imaginary + a.imaginary * b.real);
@@ -102,11 +102,11 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique la division à deux nombres complexes
+        /// Applies division to two Complex numbers
         /// </summary>
-        /// <param name="a">Premier terme de la division</param>
-        /// <param name="b">Deuxième terme de la division</param>
-        /// <returns>Quotient des deux nombres complexes</returns>
+        /// <param name="a">Dividend</param>
+        /// <param name="b">Divisor</param>
+        /// <returns>Quotient of the two Complex objects</returns>
         static public Complex operator /(Complex a, Complex b)
         {
             Complex res = new((float)((a.real * b.real + a.imaginary * b.imaginary) / (Math.Pow(b.real, 2) + Math.Pow(b.imaginary, 2))), (float)((a.real * b.imaginary - a.imaginary * b.real) / (Math.Pow(b.real, 2) + Math.Pow(b.imaginary, 2))));
@@ -114,11 +114,11 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Divise un nombre complexe par un entier
+        /// Divide a complex number by an integer
         /// </summary>
-        /// <param name="a">Premier terme de la division</param>
-        /// <param name="b">Deuxième terme de la division</param>
-        /// <returns>Quotient du Complex a par l'entier b</returns>
+        /// <param name="a">Complex dividend</param>
+        /// <param name="b">Integer divisor</param>
+        /// <returns>Quotient of Complex a by the integer b</returns>
         static public Complex operator /(Complex a, int b)
         {
             Complex res = new(a.real / b, a.imaginary / b);
@@ -126,11 +126,11 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Additionne deux nombres complexes entre eux
+        /// Adds two Complex numbers together
         /// </summary>
-        /// <param name="a">Premier terme de l'addition</param>
-        /// <param name="b">Deuxième terme de l'addition</param>
-        /// <returns>Somme des deux nombres complexes</returns>
+        /// <param name="a">First term of the addition</param>
+        /// <param name="b">Second term of the addition</param>
+        /// <returns>Sum of the two Complex objects</returns>
         static public Complex operator +(Complex a, Complex b)
         {
             Complex res = null;
@@ -139,11 +139,11 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Aditionne un entier à un nombre complexe
+        /// Adds an integer to a complex number
         /// </summary>
-        /// <param name="a">Premier terme de l'addition</param>
-        /// <param name="b">Deuxième terme de l'addition</param>
-        /// <returns>Somme du Complex a avec l'entier b</returns>
+        /// <param name="a">Complex term of the addition</param>
+        /// <param name="b">Integer term of the addition</param>
+        /// <returns>Sum of Complex a with the integer b</returns>
         static public Complex operator +(Complex a, int b)
         {
             Complex res = null;
@@ -152,11 +152,11 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Soustrait deux nombres complexes entre eux
+        /// Subtract two Complex numbers from each other
         /// </summary>
-        /// <param name="a">Premier terme de la soustraction</param>
-        /// <param name="b">Deuxième terme de la soustraction</param>
-        /// <returns>Complex correspondant à la différence du Complex a et du Complex b</returns>
+        /// <param name="a">Minuend</param>
+        /// <param name="b">Subtrahend</param>
+        /// <returns>Complex corresponding to the difference of Complex a and Complex b</returns>
         static public Complex operator -(Complex a, Complex b)
         {
             Complex res = new(a.real - b.real, a.imaginary - b.imaginary);
