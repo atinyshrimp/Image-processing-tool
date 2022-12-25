@@ -8,7 +8,7 @@ namespace PSI_Joyce
 {
 
     /// <summary>
-    /// Classe gérant le fonctionnement des pixels
+    /// Class managing the operation of pixels
     /// </summary>
     public class Pixel
     {
@@ -23,7 +23,7 @@ namespace PSI_Joyce
         #region Properties
 
         /// <summary>
-        /// Composante rouge du Pixel
+        /// Pixel red component
         /// </summary>
         public byte Red 
         {
@@ -35,7 +35,7 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Composante verte du Pixel
+        /// Pixel green component
         /// </summary>
         public byte Green
         {
@@ -47,7 +47,7 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Composante bleue du Pixel
+        /// Pixel blue component
         /// </summary>
         public byte Blue
         {
@@ -59,15 +59,15 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// La moyenne des trois composantes
+        /// The average of the three color components
         /// </summary>
         public byte Avrg { get => (byte)((red + green + blue) / 3); }
 
         /// <summary>
-        /// Indexation de la classe Pixel
+        /// Indexer declaration of the Pixel class
         /// </summary>
-        /// <param name="n">0 : Composante rouge; 1 : Verte; 2 : Bleue</param>
-        /// <returns>Byte correspondant à la composante selectionnée</returns>
+        /// <param name="n">0 : Red component; 1 : Green component; 2 : Blue component</param>
+        /// <returns>Byte corresponding to the selected componente</returns>
         public byte this[int n]
         {
             get
@@ -80,17 +80,17 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Pixel représentant la couleur noire
+        /// Pixel representing the black color
         /// </summary>
         static public Pixel Black { get => new Pixel(0, 0, 0); }
 
         /// <summary>
-        /// Pixel représentant la couleur blanche
+        /// Pixel representing the white color
         /// </summary>
         static public Pixel White { get => new(255, 255, 255); }
 
         /// <summary>
-        /// Pixel représentant la couleur bleue
+        /// Pixel representing the blue color
         /// </summary>
         static public Pixel BlueColor { get => new(0, 0, 255); }
 
@@ -99,17 +99,15 @@ namespace PSI_Joyce
         #region Constructors
 
         /// <summary>
-        /// Construit un Pixel, triplet de bytes correspondant aux composantes rouge, verte et bleu d'une couleur
+        /// Constructs a Pixel with a triplet of bytes corresponding to the red, green and blue components of a color
         /// </summary>
-        /// <param name="red">Composante rouge du Pixel, comprise entre 0 et 255</param>
-        /// <param name="green">Composante verte du Pixel, comprise entre 0 et 255</param>
-        /// <param name="blue">Composante bleue du Pixel, comprise entre 0 et 255</param>
+        /// <param name="red">Red component of the Pixel, between 0 and 255</param>
+        /// <param name="green">Green component of the Pixel, between 0 and 255</param>
+        /// <param name="blue">Blue component of the Pixel, between 0 and 255</param>
         public Pixel(byte red, byte green, byte blue)
         {
             this.red = red;
-
             this.green = green;
-
             this.blue = blue;
         }
 
@@ -120,11 +118,11 @@ namespace PSI_Joyce
         #region Utilitary methods
 
         /// <summary>
-        /// Vérifie si deux instances de Pixel sont égales
+        /// Checks if two instances of Pixel are equal
         /// </summary>
-        /// <param name="a">Premier pixel (comparateur)</param>
-        /// <param name="b">Deuxième pixel (comparé)</param>
-        /// <returns>True si les deux Pixels sont les mêmes, False sinon</returns>
+        /// <param name="a">First pixel (comparator)</param>
+        /// <param name="b">Second pixel (compared)</param>
+        /// <returns>True if the two Pixels are the same, False otherwise</returns>
         static public bool operator ==(Pixel a, Pixel b)
         {
             bool res = false;
@@ -133,31 +131,32 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Vérifie si deux instances de Pixel sont différentes
+        /// Checks if two Pixel instances are different
         /// </summary>
-        /// <param name="a">Premier pixel (comparateur)</param>
-        /// <param name="b">Deuxième pixel (comparé)</param>
-        /// <returns>True si les deux Pixels sont différents, False sinon</returns>
+        /// <param name="a">First pixel (comparator)</param>
+        /// <param name="b">Second pixel (compared)</param>
+        /// <returns>True if the two Pixels are different, False otherwise</returns>
 
         static public bool operator !=(Pixel a, Pixel b)
         {
-            bool res = false;
+/*            bool res = false;
             if (a.red != b.red || a.green != b.green || a.blue != b.blue) res = true;
             return res;
-
+*/
+            return !(a == b);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="queue">Queue contenant tous les bytes de l'image bitmap</param>
-        /// <returns>Pixel correspondant aux trois premiers bytes dans la Queue passée en paramètres</returns>
+        /// <param name="queue">Queue containing all the bytes of the bitmap image</param>
+        /// <returns>Pixel corresponding to the first three bytes in the Queue passed in parameters</returns>
         static public Pixel ReadPixel(Queue<byte> queue)
         {
             Pixel res = null;
             if (queue != null && queue.Count > 0)
             {
-                //ordre lu en bitmap
+                // bitmap reading order
                 byte b = queue.Dequeue();
                 byte g = queue.Dequeue();
                 byte r = queue.Dequeue();
@@ -167,15 +166,15 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique l'opération logique "Ou exclusif"
+        /// Applies the "Exclusive Or" logical operation
         /// </summary>
-        /// <param name="a">Première entrée</param>
-        /// <param name="b">Deuxième entrée</param>
-        /// <returns>Pixel noir si les deux entrées sont différentes, Pixel blanc sinon</returns>
+        /// <param name="a">First entry</param>
+        /// <param name="b">Second entry</param>
+        /// <returns>Black Pixel if the two inputs are different, white Pixel otherwise</returns>
         static public Pixel XOR(Pixel a, Pixel b)
         {
             Pixel res;
-            res = a != b ? Pixel.Black : Pixel.White; //if (a != b) { res = Pixel.Black; } else { res = Pixel.White; } opérateur conditionel ternaire
+            res = a != b ? Pixel.Black : Pixel.White; // if (a != b) { res = Pixel.Black; } else { res = Pixel.White; } ternary conditional operator
             return res;
         }
 
@@ -184,9 +183,9 @@ namespace PSI_Joyce
         #region Color changes
 
         /// <summary>
-        /// Colore le Pixel courant en nuance de gris
+        /// Colors the current pixel in shades of gray
         /// </summary>
-        /// <returns>Pixel grisé</returns>
+        /// <returns>Greyscale Pixel</returns>
         public Pixel Grayscale()
         {
             byte grey = Convert.ToByte(0.299 * red + 0.587 * green + 0.114 * blue);
@@ -194,9 +193,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique l'effet "Négatif" à l'instance courante de Pixel
+        /// Applies the "Negative" effect to the current instance of Pixel
         /// </summary>
-        /// <returns>Pixel correspondant à la couleur inverse du Pixel de base</returns>
+        /// <returns>Pixel corresponding to the inverse color of the base Pixel</returns>
         public Pixel Negative()
         {
             return new Pixel((byte)(255 - red), (byte)(255 - green), (byte)(255 - blue));
