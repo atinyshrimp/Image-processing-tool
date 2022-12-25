@@ -7,14 +7,14 @@ using System.Collections.Generic;
 namespace PSI_Joyce
 {
     /// <summary>
-    /// Classe reprenant le principe de la classe Bitmap de Microsoft
+    /// Class recreating the principle of Microsoft's Bitmap class
     /// </summary>
     public class MyImage
     {
         #region Attributes
 
+        private readonly string type = ".bmp";
         private HeaderInfo header;
-        private string type = ".bmp";
         private Pixel[,] image;
 
         #endregion
@@ -22,12 +22,12 @@ namespace PSI_Joyce
         #region Properties
 
         /// <summary>
-        /// Classe regroupant toutes les informations de l'entête (54 premiers bytes) du fichier .bmp
+        /// Class grouping all the header information (first 54 bytes) of the .bmp file
         /// </summary>
         public HeaderInfo Header { get => header; }
 
         /// <summary>
-        /// Image retranscrite en matrice de pixels
+        /// Image transcribed into a Pixel matrix
         /// </summary>
         public Pixel[,] Image { get => image; }
 
@@ -37,10 +37,10 @@ namespace PSI_Joyce
         #region Constructors
 
         /// <summary>
-        /// Construit une instance d'objet MyImage à partir d'un fichier
+        /// Creates a MyImage object from a file
         /// </summary>
-        /// <param name="file">fichier bitmap (.bmp) servant de base à la création de l'instance</param>
-        public MyImage(string file) //forcément un fichier .bmp
+        /// <param name="file">bitmap file (.bmp) serving as the basis for creating the instance</param>
+        public MyImage(string file) // has to be a .bmp file
         {
             if (file.Contains(type))
             {
@@ -65,9 +65,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Crée une instance de MyImage à partir d'une matrice de Pixel
+        /// Creates an instance of MyImage from a Pixel array
         /// </summary>
-        /// <param name="pxm">Matrice de Pixel correspond à une photo</param>
+        /// <param name="pxm">Pixel matrix corresponding to an image</param>
         public MyImage(Pixel[,] pxm)
         {
             image = pxm;
@@ -81,9 +81,9 @@ namespace PSI_Joyce
         #region Utilitary methods
 
         /// <summary>
-        /// Enregistre l'image, à la suite des modifications potentiellement apportées, dans un dossier de l'ordinateur
+        /// Saves the image, following any changes made, to a folder on the computer
         /// </summary>
-        /// <param name="file">Chemin sous lequel il faudra sauvegarder l'image</param>
+        /// <param name="file">Path under which to save the image</param>
         public void FromImageToFile(string file)
         {
             if (file.Contains(type))
@@ -95,7 +95,7 @@ namespace PSI_Joyce
                 for (int i = 0; i < header.Height; i++)
                 {
                     for (int j = 0; j < header.Width; j++)
-                        for (int k = 2; k >= 0; k--) output.Add(image[i, j][k]); //ordre de lecture des bitmaps dans notre cas : bleu, vert, rouge
+                        for (int k = 2; k >= 0; k--) output.Add(image[i, j][k]); // bitmap reading order in our case : blue, green, red
 
                     if (header.Padding != 0)
                     {
@@ -111,7 +111,7 @@ namespace PSI_Joyce
 
                 for (int i = 0; i < header.Size; i++)
                 {
-                    if (i < header.SizeOffset) res[i] = header.Array[i]; //premiers 54 bytes donc de l'info
+                    if (i < header.SizeOffset) res[i] = header.Array[i]; // first 54 bytes so just information
                     else res[i] = bitmap[i - header.SizeOffset];
                 }
                 
@@ -120,9 +120,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Convertit le tableau de bytes passé en paramètres en entier
+        /// Convert the passed array of bytes into an integer
         /// </summary>
-        /// <param name="tab"></param>
+        /// <param name="tab">Byte array to convert</param>
         /// <returns></returns>
         static public int EndianToInt(byte[] tab)
         {
@@ -139,10 +139,10 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Convertit un entier en tableau de bytes
+        /// Convert an integer to an array of bytes
         /// </summary>
-        /// <param name="val">Entier à convertir</param>
-        /// <param name="length">Longueur du tableau voulu (soit 2, soit 4)</param>
+        /// <param name="val">Integer to convert</param>
+        /// <param name="length">Length of the wanted array (either 2 or 4)</param>
         /// <returns></returns>
         static public byte[] IntToEndian(int val, int length)
         {
@@ -164,10 +164,10 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Remplit à gauche une chaîne de caractères représentant un nombre binaire
+        /// Fills a string representing a binary number with 0s on the left
         /// </summary>
-        /// <param name="bin">Le nombre binaire à remplir</param>
-        /// <param name="length">Nombre total de bits voulus</param>
+        /// <param name="bin">The binary number to fill</param>
+        /// <param name="length">Total number of bits wanted</param>
         /// <returns></returns>
         static public string FillBinary(string bin, int length)
         {
@@ -212,12 +212,12 @@ namespace PSI_Joyce
 
         #region Image processing methods (TD3)
 
-        #region Modification des Pixels
+        #region Modification of Pixels
 
         /// <summary>
-        /// Rend l'instance de MyImage en naunces de gris
+        /// Makes instance of MyImage grayscale
         /// </summary>
-        /// <returns>une matrice de Pixel, chacun correspondant à une nuance de gris</returns>
+        /// <returns>a matrix of Pixels, each Pixel corresponding to a shade of gray</returns>
         public Pixel[,] Greyscale()
         {
             Pixel[,] res = null;
@@ -237,9 +237,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Affiche l'image courante en noir et blanc
+        /// Turns the current image in black and white
         /// </summary>
-        /// <returns>Matrice de Pixel où chacun des Pixels est soit noir, soit blanc</returns>
+        /// <returns>Pixel Matrix where each Pixel is either black or white</returns>
         public Pixel[,] BlackAndWhite()
         {
             Pixel[,] res = null;
@@ -259,9 +259,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Inverse les couleurs de l'image courante
+        /// Reverses the colors of the current image
         /// </summary>
-        /// <returns>Matrice de Pixels où chaque pixel est la couleur négative du pixel originale</returns>
+        /// <returns>Pixel Matrix where each pixel is the negative color of the original pixel</returns>
         public Pixel[,] Negative()
         {
             Pixel[,] res = null;
@@ -281,10 +281,10 @@ namespace PSI_Joyce
 
         #endregion
 
-        #region Modification des positions des Pixels
+        #region Modification of Pixels' position
 
         /// <summary>
-        /// Flip l'image diagonalement
+        /// Flips the image diagonally
         /// </summary>
         /// <returns></returns>
         public Pixel[,] Mirror()
@@ -301,9 +301,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Flip l'image en ayant en référence l'axe des x
+        /// Flip the image along the x-axis
         /// </summary>
-        /// <returns>Matrice de Pixel symétrique à celle de l'instance courante par rapport à l'axe des abscisses</returns>
+        /// <returns>Pixel matrix symmetrical to that of the current instance relative to the x-axis</returns>
         public Pixel[,] MirrorX() 
         {
             Pixel[,] res = null;
@@ -322,9 +322,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Flip l'image avec l'axe des y comme référence
+        /// Flip the image along the y-axis
         /// </summary>
-        /// <returns>Matrice de Pixel symétrique à celle de l'instance courante par rapport à l'axe des ordonnées</returns>
+        /// <returns>Pixel matrix symmetrical to that of the current instance relative to the y-axis</returns>
         public Pixel[,] MirrorY()
         {
             Pixel[,] res = null;
@@ -343,10 +343,10 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Agrandit ou rétrécit l'image courante en fonction du facteur passé en paramètre
+        /// Enlarges or shrinks the current image according to the factor passed in parameter
         /// </summary>
-        /// <param name="ratio">facteur d'agrandissement/de rétrécissement : float strictement supérieur à 0</param>
-        /// <returns>Matrice de Pixel agrandie si ratio > 1 et rétrécie si ratio est compris entre 0 et 1</returns>
+        /// <param name="ratio">scale factor: float strictly greater than 0</param>
+        /// <returns>Pixel matrix enlarged if ratio > 1 and reduced if ratio is between 0 and 1</returns>
         public Pixel[,] Scale(float ratio)
         {
             Pixel[,] res = null;
@@ -365,18 +365,18 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Exécute la matrice de Pixel de l'instance courante de MyImage, dans le sens horaire (+) et anti-horaire (-)
+        /// Rotates the pixel matrix of the current MyImage instance, clockwise (-) and counter-clockwise (+)
         /// </summary>
-        /// <param name="angle">angle (en degré) à utiliser lors de la rotation (négatif pour le sens horaire)</param>
+        /// <param name="angle">angle (in degrees) to use when rotating (negative for clockwise)</param>
         /// <returns></returns>
-        public Pixel[,] Rotate(int angle) //pour avoir un angle quelconque
+        public Pixel[,] Rotate(int angle) // to be able to work with any angle
         {
             Pixel[,] res = null;
             if (angle == 90 || angle == -90 || angle == 180 || angle == -180)
             {
                 switch(angle)
                 {
-                    case -90: //sens horaire
+                    case -90: // clockwise
 
                         #region Rotation -90°
                         res = new Pixel[image.GetLength(1), image.GetLength(0)];
@@ -397,7 +397,7 @@ namespace PSI_Joyce
                         break;
                     #endregion 
 
-                    case 90: //sens anti-horaire
+                    case 90: //counter-clockwise
 
                         #region Rotation 90°
                         Pixel[,] temp = Rotate(180);
@@ -468,44 +468,44 @@ namespace PSI_Joyce
         #region Filters (TD4)
 
         /// <summary>
-        /// Applique une convolution sur l'image de l'instance courante
+        /// Applies a convolution to the image of the current instance
         /// </summary>
-        /// <param name="filtre">Noyau à utiliser lors de la convolution</param>
+        /// <param name="filter">Kernel to use when convolving</param>
         /// <returns></returns>
-        private Pixel[,] Convolve(float[,] filtre)
+        private Pixel[,] Convolve(float[,] filter)
         {
             Pixel[,] res = null;
-            if (image != null && filtre != null && image.Length > 0 && filtre.Length > 0)
+            if (image != null && filter != null && image.Length > 0 && filter.Length > 0)
             {
                 int hauteur = image.GetLength(0);
                 int largeur = image.GetLength(1);
                 res = new Pixel[hauteur, largeur];
-                int offset = filtre.GetLength(0) / 2;
+                int offset = filter.GetLength(0) / 2;
 
                 //calcul du coefficient de "pondération"
                 float coeff = 0;
-                foreach (float elt in filtre) coeff += elt;
+                foreach (float elt in filter) coeff += elt;
                 if (coeff == 0) coeff = 1;
 
                 for (int i = offset; i < hauteur - offset; i++)
                 {
                     for (int j = offset; j < largeur - offset; j++)
                     {
-                        int r = (int)((filtre[0, 0] * image[i - 1, j - 1].Red + filtre[0, 1] * image[i - 1, j].Red + filtre[0, 2] * image[i - 1, j + 1].Red +
-                                        filtre[1, 0] * image[i, j - 1].Red + filtre[1, 1] * image[i, j].Red + filtre[1, 2] * image[i, j + 1].Red +
-                                        filtre[2, 0] * image[i + 1, j - 1].Red + filtre[2, 1] * image[i + 1, j].Red + filtre[2, 2] * image[i + 1, j + 1].Red) / coeff);
+                        int r = (int)((filter[0, 0] * image[i - 1, j - 1].Red + filter[0, 1] * image[i - 1, j].Red + filter[0, 2] * image[i - 1, j + 1].Red +
+                                        filter[1, 0] * image[i, j - 1].Red + filter[1, 1] * image[i, j].Red + filter[1, 2] * image[i, j + 1].Red +
+                                        filter[2, 0] * image[i + 1, j - 1].Red + filter[2, 1] * image[i + 1, j].Red + filter[2, 2] * image[i + 1, j + 1].Red) / coeff);
                         if (r < 0) r = 0;
                         else if (r > 255) r = 255;
 
-                        int g = (int)((filtre[0, 0] * image[i - 1, j - 1].Green + filtre[0, 1] * image[i - 1, j].Green + filtre[0, 2] * image[i - 1, j + 1].Green +
-                                        filtre[1, 0] * image[i, j - 1].Green + filtre[1, 1] * image[i, j].Green + filtre[1, 2] * image[i, j + 1].Green +
-                                        filtre[2, 0] * image[i + 1, j - 1].Green + filtre[2, 1] * image[i + 1, j].Green + filtre[2, 2] * image[i + 1, j + 1].Green) / coeff);
+                        int g = (int)((filter[0, 0] * image[i - 1, j - 1].Green + filter[0, 1] * image[i - 1, j].Green + filter[0, 2] * image[i - 1, j + 1].Green +
+                                        filter[1, 0] * image[i, j - 1].Green + filter[1, 1] * image[i, j].Green + filter[1, 2] * image[i, j + 1].Green +
+                                        filter[2, 0] * image[i + 1, j - 1].Green + filter[2, 1] * image[i + 1, j].Green + filter[2, 2] * image[i + 1, j + 1].Green) / coeff);
                         if (g < 0) g = 0;
                         else if (g > 255) g = 255;
 
-                        int b = (int)((filtre[0, 0] * image[i - 1, j - 1].Blue + filtre[0, 1] * image[i - 1, j].Blue + filtre[0, 2] * image[i - 1, j + 1].Blue +
-                                        filtre[1, 0] * image[i, j - 1].Blue + filtre[1, 1] * image[i, j].Blue + filtre[1, 2] * image[i, j + 1].Blue +
-                                        filtre[2, 0] * image[i + 1, j - 1].Blue + filtre[2, 1] * image[i + 1, j].Blue + filtre[2, 2] * image[i + 1, j + 1].Blue) / coeff);
+                        int b = (int)((filter[0, 0] * image[i - 1, j - 1].Blue + filter[0, 1] * image[i - 1, j].Blue + filter[0, 2] * image[i - 1, j + 1].Blue +
+                                        filter[1, 0] * image[i, j - 1].Blue + filter[1, 1] * image[i, j].Blue + filter[1, 2] * image[i, j + 1].Blue +
+                                        filter[2, 0] * image[i + 1, j - 1].Blue + filter[2, 1] * image[i + 1, j].Blue + filter[2, 2] * image[i + 1, j + 1].Blue) / coeff);
                         if (b < 0) b = 0;
                         else if (b > 255) b = 255;
 
@@ -536,7 +536,7 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique un effet flou sur l'image courante
+        /// Applies a blur effect to the current image
         /// </summary>
         /// <returns></returns>
         public Pixel[,] Blur()
@@ -547,7 +547,7 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique l'effet "détection des bords" sur l'image courante
+        /// Applies the "edge detection" effect on the current image
         /// </summary>
         /// <returns></returns>
         public Pixel[,] EdgeDetection()
@@ -559,9 +559,9 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Applique l'effet "Sharpening" sur l'image courante
+        /// Applies the "Sharpening" effect to the current image
         /// </summary>
-        /// <returns>Matrice de Pixel correspondant à une image plus nette que l'originale</returns>
+        /// <returns>Pixel matrix corresponding to a sharper image than the original</returns>
         public Pixel[,] Sharpening()
         {
             Pixel[,] res = null;
@@ -570,7 +570,7 @@ namespace PSI_Joyce
         }
 
         /// <summary>
-        /// Renforce les bords d'une image
+        /// Reinforce the edges of within an image
         /// </summary>
         /// <returns></returns>
         public Pixel[,] Embossing()
@@ -586,14 +586,14 @@ namespace PSI_Joyce
         #region TD5
 
         /// <summary>
-        /// Génère un histogramme de toutes les couleurs de l'image
+        /// Generates a histogram of all the colors in the image
         /// </summary>
-        /// <returns>Matrice de pixels représentant un histogramme RGB d'une image</returns>
+        /// <returns>Pixel matrix representing an RGB histogram of an image</returns>
         public Pixel[,] Histogram()
         {
             Pixel[,] res = new Pixel[200, 256];
             int hauteur = res.GetLength(0);
-            int borderPadding = 25; //le max du graphe sera à 25px du haut de l'image
+            int borderPadding = 25; // the max of the graph will be 25px from the top of the image
 
             int[] rouge = new int[256];
             int[] vert = new int[256];
@@ -651,9 +651,9 @@ namespace PSI_Joyce
 
 
         /// <summary>
-        /// Génère un histogramme basé sur l'image de l'instance courante et la couleur soumise
+        /// Generates a histogram based on the image of the current instance and the submitted color
         /// </summary>
-        /// <param name="color">Couleur sur laquelle l'histogramme sera basé</param>
+        /// <param name="color">Color on which the histogram will be based</param>
         /// <returns></returns>
         public Pixel[,] Histogram(string color)
         {
@@ -739,9 +739,9 @@ namespace PSI_Joyce
 
 
         /// <summary>
-        /// Cache une image dans une autre
+        /// Hide an image within another
         /// </summary>
-        /// <param name="mat">Image à masquer dans l'instance actuelle</param>
+        /// <param name="mat">Image to hide in current instance</param>
         /// <returns></returns>
         public Pixel[,] EncodeImage(Pixel[,] mat)
         {
@@ -751,9 +751,9 @@ namespace PSI_Joyce
                 if (mat.GetLength(0) <= image.GetLength(0) && mat.GetLength(1) <= image.GetLength(1))
                 {
                     res = new Pixel[image.GetLength(0), image.GetLength(1)];
-                    string[] hiderPix = new string[3]; //tableau des composantes de couleur du pixel de l'image principale
-                    string[] toHidePix = new string[3]; //tableau des composantes de couleur du pixel de l'image à cacher
-                    string[] resPix = new string[3]; //de même pour le pixel de l'image résultante
+                    string[] hiderPix = new string[3]; // main image pixel color component array
+                    string[] toHidePix = new string[3]; // array of color components of the image pixel to hide
+                    string[] resPix = new string[3]; // same but for the pixel of the resulting image
 
 
                     for (int i = 0; i < image.GetLength(0); i++)
@@ -764,12 +764,12 @@ namespace PSI_Joyce
                             {
                                 for (int k = 0; k < 3; k++)
                                 {
-                                    //conversion en binaire de la valeur de la composante de couleur
+                                    // conversion to binary of the value of the color component
                                     hiderPix[k] = Convert.ToString(image[i, j][k], 2);
                                     toHidePix[k] = Convert.ToString(mat[i, j][k], 2);
 
-                                    string strongHider = FillBinary(hiderPix[k], 8).Substring(0, 4); //bits de poids fort de l'image principale
-                                    string strongToHide = FillBinary(toHidePix[k], 8).Substring(0, 4); //bits de poids fort de l'image à cacher
+                                    string strongHider = FillBinary(hiderPix[k], 8).Substring(0, 4); // most significant bits of the main image
+                                    string strongToHide = FillBinary(toHidePix[k], 8).Substring(0, 4); // most significant bits of the image to hide
 
                                     resPix[k] = strongHider + strongToHide;
                                 }
@@ -795,9 +795,9 @@ namespace PSI_Joyce
 
 
         /// <summary>
-        /// Récupère une image cachée dans une autre, s'il y en a une
+        /// Retrieves an image hidden in another, if there is one
         /// </summary>
-        /// <returns>L'image cachée dans l'instance courante</returns>
+        /// <returns>The hidden image within the current instance</returns>
         public Pixel[,] DecodeImage()
         {
             Pixel[,] res = null;
@@ -812,8 +812,8 @@ namespace PSI_Joyce
                         
                         for (int k = 0; k < 3; k++)
                         {
-                            resPix[k] = FillBinary(Convert.ToString(image[i, j][k], 2), 8); //convertir le byte en binaire et le remplit à gauche si besoin
-                            resPix[k] = resPix[k].Substring(4, 4) + "0000"; //on ne prend que les bits de poids faible qui correspondent aux bits de poids forts de l'image cachée
+                            resPix[k] = FillBinary(Convert.ToString(image[i, j][k], 2), 8); // convert the byte to binary and fill it on the left if needed
+                            resPix[k] = resPix[k].Substring(4, 4) + "0000"; // we only take the least significant bits which correspond to the most significant bits of the hidden image
                         }
                         res[i, j] = new Pixel(Convert.ToByte(resPix[0], 2), Convert.ToByte(resPix[1], 2), Convert.ToByte(resPix[2], 2));                    
                     }
@@ -824,19 +824,19 @@ namespace PSI_Joyce
 
 
         /// <summary>
-        /// Génère une fractale parmi une sélection
+        /// Generates a fractal from a selection
         /// </summary>
-        /// <param name="type">type de la fractale voulue</param>
-        /// <returns>Image (matrice de pixels) représentant une fractale</returns>
+        /// <param name="type">type of the desired fractal</param>
+        /// <returns>Image (Pixel matrix) representing a fractal</returns>
         static public Pixel[,] Fractal(string type = "")
         {
             int hauteur = 800;
             int largeur = 800;
             int iteration = 255;
             int factor = (int)Math.Sqrt(Math.Pow(hauteur / 2, 2) + Math.Pow(largeur / 2, 2));
-            float zoom = 1f; //2.75f
+            float zoom = 1f; // 2.75f
             float decalageY = 0f;
-            float decalageX = 0f; //-.5f
+            float decalageX = 0f; // -.5f
             Pixel[,] res = new Pixel[hauteur, largeur];
 
             Complex center = new(0, 0);
@@ -870,12 +870,12 @@ namespace PSI_Joyce
                             case "Sin Julia":
                                 c = new(1f, .2f);
                                 z = z.Pow(4) + c;
-                                //z = c * z.Sin;
+                                // z = c * z.Sin;
                                 break;
                         }
                         k--;
                     }
-                    res[i, j] = new Pixel(colors[k].R, colors[k].G, colors[k].B);//new Pixel((byte)k, (byte)k, (byte)k);
+                    res[i, j] = new Pixel(colors[k].R, colors[k].G, colors[k].B); // new Pixel((byte)k, (byte)k, (byte)k);
                 }
             }
 
