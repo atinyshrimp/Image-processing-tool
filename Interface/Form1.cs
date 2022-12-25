@@ -273,7 +273,7 @@ namespace Interface
                 }
                 catch
                 {
-                    MessageBox.Show("Veuillez insérer un texte avec des caractères alphanumériques", "Génération impossible");
+                    MessageBox.Show("Please insert text with alphanumeric characters", "Unable to generate");
                     textBox1.Text = "";
                 }
             }
@@ -302,7 +302,7 @@ namespace Interface
             mirrorBox.Text = "Mirror";
             Width = 2800;
             Height = 1485;
-            MessageBox.Show("Quand vous avez fini, veillez à fermer l'application via le bouton \"Close\" situé en bas à droite", "Information importante");
+            MessageBox.Show("When you are finished, be sure to close the application by clicking the \"Close\" button located at the bottom right", "Important information");
         }
 
         private void mirrorBox_SelectedIndexChanged(object sender, EventArgs e)
