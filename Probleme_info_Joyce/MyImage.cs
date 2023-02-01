@@ -518,7 +518,7 @@ namespace PSI_Joyce
                 {
                     for (int j = 0; j < largeur; j++)
                     {
-                        if (res[i, j] == null)
+                        if (res[i, j] is null)
                         {
                             if (i == 0 && j == 0) res[i, j] = res[i + 1, j + 1];
                             else if (i == 0 && j == largeur - 1) res[i, j] = res[i + 1, j - 1];
@@ -644,7 +644,7 @@ namespace PSI_Joyce
 
             for (int i = 0; i < res.GetLength(0); i++)
                 for (int j = 0; j < res.GetLength(1); j++)
-                    if (res[i, j] == null)
+                    if (res[i, j] is null)
                         res[i, j] = Pixel.White;
             return res;
         }
@@ -730,7 +730,7 @@ namespace PSI_Joyce
 
                 for (int i = 0; i < res.GetLength(0); i++)
                     for (int j = 0; j < res.GetLength(1); j++)
-                        if (res[i, j] == null)
+                        if (res[i, j] is null)
                             res[i, j] = Pixel.Black;
 
             }
@@ -883,7 +883,6 @@ namespace PSI_Joyce
         }
 
         #endregion
-
         #endregion
 
     }

@@ -125,9 +125,7 @@ namespace PSI_Joyce
         /// <returns>True if the two Pixels are the same, False otherwise</returns>
         static public bool operator ==(Pixel a, Pixel b)
         {
-            bool res = false;
-            if (a.red == b.red && a.green == b.green && a.blue == b.blue) res = true;
-            return res;
+            return (a.red == b.red && a.green == b.green && a.blue == b.blue);
         }
 
         /// <summary>
@@ -139,10 +137,6 @@ namespace PSI_Joyce
 
         static public bool operator !=(Pixel a, Pixel b)
         {
-/*            bool res = false;
-            if (a.red != b.red || a.green != b.green || a.blue != b.blue) res = true;
-            return res;
-*/
             return !(a == b);
         }
 
